@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mac.demo.mappers.UserMapper">
+
+<insert parameterType="com.mac.demo.model.User" id="add">INSERT INTO user(nameMac,birthMac,uidMac,upwMac,phoneNumMac,emailMac,nickNameMac,genderMac,cityMac,townMac,villageMac,managerMac)VALUES(#{nameMac},#{birthMac},#{uidMac},#{upwMac},#{phoneNumMac},#{emailMac},#{nickNameMac},#{genderMac},#{emailMac},#{cityMac},#{townMac},#{villageMac},#{managerMac}) </insert>
+
+<select id="getList" resultType="com.mac.demo.model.User">SELECT * FROM user </select>
+
+<select id="getDetail" resultType="com.mac.demo.model.User">SELECT * FROM user WHERE uidMac=#{uidMac} </select>
+
+<update parameterType="com.mac.demo.model.User" id="edit">UPDATE user SET nameMac=#{nameMac}, birthMac=#{birthMac}, cityMac=#{cityMac}, townMac=#{townMac}, villageMac=#{villageMac},emailMac=#{emailMac}, genderMac=#{genderMac}, upwMac=#{upwMac} WHERE uidMac=#{uidMac} </update>
+
+<delete parameterType="com.mac.demo.model.User" id="delete">DELETE FROM user WHERE userMac=#{userMac} </delete>
+
+<select parameterType="String" id="getiD" resultType="com.mac.demo.model.User">SELECT id FROM user WHERE idMac=#{uidMac} </select>
+
+</mapper>
