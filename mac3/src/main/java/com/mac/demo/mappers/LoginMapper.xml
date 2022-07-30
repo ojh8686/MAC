@@ -13,6 +13,6 @@
 	</select>
 
 	<select parameterType="String" id="findPassword" resultType="String">
-		SELECT pwMac FROM user_tb WHERE idMac=#{idMac} AND nameMac=#{name} AND phoneNumMac=#{phoneNumMac}
+		SELECT pwMac FROM user_tb WHERE idMac=#{idMac} AND nameMac=#{nameMac} AND phoneNumMac=#{phoneNumMac}
 	</select>
 </mapper> 

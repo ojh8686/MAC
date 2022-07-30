@@ -182,7 +182,7 @@ public class LoginController {
 		model.addAttribute("msg", idMac+"님 비밀번호는 ("+foundPassword+") 입니다");
 		//return map;
 		
-		return "thymeleaf/mac/home/home";
+		return "thymeleaf/mac/login/loginForm";
 		}else{
 			model.addAttribute("msg","아이디나 이름이나 이메일이 잘못 입력되었습니다");
 			
