@@ -1,54 +1,56 @@
 package com.mac.demo.model;
 
-
-import org.springframework.stereotype.Component;
-
-@Component
+import java.sql.Date;
 public class Board {
 
-	int numMac;
-	String nicknameMac;
-	String titleMac;
-	String contentsMac;
-	java.sql.Date wdateMac;
-	int pcodeMac;
+	private int num; //번호
+	private String nickName; //닉네임
+	private String title; //제목
+	private String contents; //내용
+	private java.sql.Date wdate; //작성일
+	private int pcode; //부모글pcode
+	private String type; //속성(업종등)
 
-
-	public int getNumMac() {
-		return numMac;
+	public int getNum() {
+		return num;
 	}
-	public void setNumMac(int numMac) {
-		this.numMac = numMac;
+	public void setNum(int num) {
+		this.num = num;
 	}
-	public String getNicknameMac() {
-		return nicknameMac;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNicknameMac(String nicknameMac) {
-		this.nicknameMac = nicknameMac;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
-	public String getTitleMac() {
-		return titleMac;
+	public String getTitle() {
+		return title;
 	}
-	public void setTitleMac(String titleMac) {
-		this.titleMac = titleMac;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getContentsMac() {
-		return contentsMac;
+	public String getContents() {
+		return contents;
 	}
-	public void setContentsMac(String contentsMac) {
-		this.contentsMac = contentsMac;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
-	public java.sql.Date getWdateMac() {
-		return wdateMac;
+	public java.sql.Date getWdate() {
+		return wdate;
 	}
-	public void setWdateMac(java.sql.Date wdateMac) {
-		this.wdateMac = wdateMac;
+	public void setWdate(java.sql.Date wdate) {
+		this.wdate = wdate;
 	}
-	public int getPcodeMac() {
-		return pcodeMac;
+	public int getPcode() {
+		return pcode;
 	}
-	public void setPcodeMac(int pcodeMac) {
-		this.pcodeMac = pcodeMac;
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 }

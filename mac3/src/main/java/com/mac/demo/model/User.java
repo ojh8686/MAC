@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-	
+	private int numMac;     //번호
 	private String nameMac; //이름
-	private Date birthMac; //생년월일
+	private java.sql.Date birthMac; //생년월일
 	private String idMac; //아이디
 	private String pwMac;  //비밀번호
 	private String phoneNumMac;  //전화번호
@@ -21,16 +21,24 @@ public class User {
 	private String emailMac; //이메일
 	private int managerMac; //관리자권환 유무
 	
+	
+	public int getNumMac() {
+		return numMac;
+	}
+	public void setNumMac(int numMac) {
+		this.numMac = numMac;
+	}
 	public String getNameMac() {
 		return nameMac;
 	}
 	public void setNameMac(String nameMac) {
 		this.nameMac = nameMac;
 	}
-	public Date getBirthMac() {
+	
+	public java.sql.Date getBirthMac() {
 		return birthMac;
 	}
-	public void setBirthMac(Date birthMac) {
+	public void setBirthMac(java.sql.Date birthMac) {
 		this.birthMac = birthMac;
 	}
 	public String getIdMac() {

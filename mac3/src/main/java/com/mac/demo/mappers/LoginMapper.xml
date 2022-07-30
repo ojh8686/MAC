@@ -4,6 +4,15 @@
 
 <mapper namespace="com.mac.demo.mappers.LoginMapper">
 
-	<select parameterType="String" id="loginUser" resultType="com.mac.demo.model.User">
-		SELECT idMac FROM user_tb WHERE idMac=#{idMac} and pwMac=#{pwMac} </select>
+	<select parameterType="String" id="loginUser" resultType="String">
+		SELECT idMac FROM user_tb WHERE idMac=#{idMac} AND pwMac=#{pwMac}
+	</select>
+
+	<select parameterType="String" id="findId" resultType="String">
+		SELECT idMac FROM user_tb WHERE nameMac=#{nameMac} AND phoneNumMac=#{phoneNumMac}
+	</select>
+
+	<select parameterType="String" id="findPassword" resultType="String">
+		SELECT pwMac FROM user_tb WHERE idMac=#{idMac} AND nameMac=#{name} AND phoneNumMac=#{phoneNumMac}
+	</select>
 </mapper> 
