@@ -22,22 +22,23 @@ public class HomeService {
 	public User getMyPageInUser(String nickNameMac) {
 		
 	 
-	    return uao.getMypage(nickNameMac);
+	    return uao.getOne(nickNameMac);
 	    
 		
 	}
 	
-	public List<Board> getMyPageInFreeBoard(String nickNameMac) {
-		System.out.println(bao.getMypageInFreeBoard(nickNameMac).toString());
+	public List<Board> getMyPageInFreeBoard(String idMac) {
+		System.out.println(bao.getMypageInFreeBoard(idMac).toString());
 		 
-	    return bao.getMypageInFreeBoard(nickNameMac);
+	    return bao.getMypageInFreeBoard(idMac);
 	    
 		
 	}
-	public List<Board> getMyPageInAdsBoard(String nickNameMac) {
+	public List<Board> getMyPageInAdsBoard(String idMac) {
 		
-	    return bao.getMypageInAdsBoard(nickNameMac);
+	    return bao.getMypageInAdsBoard(idMac);
 	    
 		
 	}
+
 }

@@ -2,14 +2,18 @@ package com.mac.demo.controller;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mac.demo.model.Board;
+import com.mac.demo.model.User;
 import com.mac.demo.service.HomeService;
 
 
@@ -23,7 +27,13 @@ public class HomeController {
 
 //	홈화면
 	@GetMapping("")
-	public String home(Model model) {
+	public String home(Model model,HttpSession session) {
+		
+		if(session.getAttribute("idMac")!=null) {
+			String uid = session.getAttribute("idMac").toString();
+			model.addAttribute("idMac",uid);
+			return "thymeleaf/mac/home/home";
+		}
 		
 		return "thymeleaf/mac/home/home";
 	}
@@ -42,16 +52,23 @@ public class HomeController {
 		return "thymeleaf/mac/home/siteIntroduction";
 	}
 	
-	@GetMapping("/myPage/{nickNameMac}")
-	public String myPage(@PathVariable("nickNameMac") String nickNameMac, Model model) {
+	@GetMapping("/myPage/{idMac}")
+	public String myPage(@PathVariable("idMac") String idMac, Model model) {
 
-		model.addAttribute("user",svc.getMyPageInUser(nickNameMac));
-		List<Board> freeBoard = svc.getMyPageInFreeBoard(nickNameMac);
+		model.addAttribute("user",svc.getMyPageInUser(idMac));
+		List<Board> freeBoard = svc.getMyPageInFreeBoard(idMac);
 		model.addAttribute("freeBoard", freeBoard);
-		List<Board> adsBoard = svc.getMyPageInAdsBoard(nickNameMac);
+		List<Board> adsBoard = svc.getMyPageInAdsBoard(idMac);
 		model.addAttribute("adsBoard", adsBoard);
-		return "thymeleaf/mac/home/myPage";
+		return "thymeleaf/mac/User/myPage";
 	}
+
 	
+//	부트 스트랩
+	@GetMapping("/home2")
+	public String home2() {
+		
+		return "thymeleaf/mac/home/serviceBootstrap";
+	}
 	
 }
