@@ -9,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mac.demo.model.Board;
-import com.mac.demo.model.User;
 import com.mac.demo.service.HomeService;
 
 
@@ -24,7 +22,7 @@ public class HomeController {
 	
 	@Autowired 
 	private HomeService svc;
-
+	
 //	홈화면
 	@GetMapping("")
 	public String home(Model model,HttpSession session) {
@@ -62,13 +60,6 @@ public class HomeController {
 		model.addAttribute("adsBoard", adsBoard);
 		return "thymeleaf/mac/User/myPage";
 	}
-
 	
-//	부트 스트랩
-	@GetMapping("/home2")
-	public String home2() {
-		
-		return "thymeleaf/mac/home/serviceBootstrap";
-	}
 	
 }

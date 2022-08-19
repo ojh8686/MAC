@@ -1,19 +1,15 @@
 package com.mac.demo.service;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.mac.demo.mappers.LoginMapper;
 
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class LoginService {

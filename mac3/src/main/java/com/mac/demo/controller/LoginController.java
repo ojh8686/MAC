@@ -10,7 +10,6 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +46,7 @@ public class LoginController {
 		model.addAttribute("idMac",session.getAttribute("idMac").toString());
 		model.addAttribute("msg", session.getAttribute("idMac").toString()+"님 환영합니다");
 		
-		return "thymeleaf/mac/home/home";
+		return "redirect:/home";
 		}else if(checkedId==null) {
 			model.addAttribute("msg","잘못된 아이디나 비밀번호 입니다");
 			
@@ -63,7 +62,9 @@ public class LoginController {
 	{	
 		System.out.println(session.getAttribute("idMac"));
 		
-		session.invalidate();
+//		session.invalidate();
+		session.removeAttribute("idMac");
+		
 		Map<String,Object> map = new HashMap<>();
 		map.put("logout", true);
 		return map;
@@ -104,7 +105,7 @@ public class LoginController {
 		}else{
 			model.addAttribute("msg","이름이나 이메일이 잘못 입력되었습니다");
 			
-			return "thymeleaf/mac/home/home";
+			return "thymeleaf/mac/login/findId";
 		}
 	}
 	

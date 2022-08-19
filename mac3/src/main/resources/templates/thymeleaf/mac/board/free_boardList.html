@@ -14,6 +14,10 @@
 	crossorigin="anonymous">
 </script>
 <style type="text/css">
+#header {
+	background-color: aquamarine;
+}
+
 #login {
 	font-size: 4px;
 }
@@ -141,27 +145,28 @@ tr:hover {
 			</tr>
 			<tr th:each="board : ${pageInfo.list}">
 				<td th:text="${board.numMac}"></td>
-				<td><a th:text="${board.titleMac}" th:href="@{'/board/detail/'+ ${board.numMac}}"></a>
+				<td><a th:text="${board.titleMac}" th:href="@{'/board/free/detail/'+ ${board.numMac}}"></a>
 				<span th:text="'	['+${board.countMac}+']'">
 				</td>
 				<td th:text="${board.nickNameMac}"></td>
 				<td th:text="${board.wdateMac}">
 		</table>
-		
+	<br>
 		<form id="search_form" method="get" action="/board/free/search?category=+${category}">
 			<div>
-				<label for="category">검색항목</label> <select name="category">
-					<option value="nickname">작성자</option>
+				&nbsp;&nbsp;
+				<label for="category">검색항목</label> 
+				<select name="category">
 					<option value="contents">글제목+내용</option>
-				</select> <label for="keyword">검색어</label> <input type="text" name="keyword"
-					value="smith">
-			</div>
-			<div>
-				<button type="reset">취소</button>
+					<option value="nickname">작성자</option>
+				</select> 
+				<label for="keyword">검색어</label> <input type="text" name="keyword">
 				<button type="submit">검색</button>
-				<button type="button"><a href="/board/input">글쓰기</a></button>
+				<button type="reset">취소</button>
+				&nbsp;&nbsp;			
+				<button type="button"><a href="/board/free/input">글쓰기</a></button>
 			</div>
-
+			&nbsp;&nbsp;
 			<span th:each="i :${pageInfo.navigatepageNums}"> 
 				<span th:if="${i==pageInfo.pageNum}"> 
 					<span th:text="${i}">

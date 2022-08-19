@@ -1,8 +1,11 @@
 package com.mac.demo.controller;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.mac.demo.model.User;
 import com.mac.demo.service.UserService;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -21,6 +26,7 @@ public class UserController {
 	//유저 맵퍼
 	@Autowired
 	private UserService svc;
+
 //	계정추가폼
 	@GetMapping("/addForm")
 	public String addForm(Model model) {
@@ -28,24 +34,31 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "thymeleaf/mac/User/addForm";
 	}
-
-	@GetMapping("/addForm/{idMac}")
+	
+//	아이디 체크후 추가폼
+	@PostMapping("/addForm/{idMac}")
 	public String addForm2(@PathVariable("idMac")String idMac, Model model) {
 		User user = new User();
 		user.setIdMac(idMac);
 		model.addAttribute("user", user);
 		return "thymeleaf/mac/User/addForm";
 	}
-
-	@GetMapping("/addForm/{idMac}/{emailMac}")
-	public String addForm3(@PathVariable("idMac")String idMac, @PathVariable("emailMac")String emailMac, Model model) {
+	
+//	아이디 체크, 이메일 인증후 추가폼
+	@PostMapping("/addForm/{idMac}/{emailMac}")
+	public String addForm3(@PathVariable("idMac")String idMac, 
+			@PathVariable("emailMac")String emailMac, 
+			@RequestParam(name ="check", defaultValue="0")String check, Model model) {
 		User user = new User();
 		user.setIdMac(idMac);
 		user.setEmailMac(emailMac);
-		model.addAttribute("user", user);
-		return "thymeleaf/mac/User/addForm";
+		if(Integer.parseInt(check) == 1) {
+			model.addAttribute("user", user);
+			return "thymeleaf/mac/User/addForm";
+		}
+		return "thymeleaf/mac/home/home";
 	}
-
+	
 //	계정추가
 	@PostMapping("/add")
 	@ResponseBody
@@ -66,10 +79,15 @@ public class UserController {
 	
 //	마이페이지
 	@GetMapping("/detail")
-	public String mypage(@RequestParam("idMac")String idMac, Model model) {
+	public String mypage(@RequestParam("idMac")String idMac, Model model, HttpSession session) {
 		User user = svc.getOne(idMac);
+		
+		if((String)session.getAttribute("idMac") == null){ //세션을 가져옴
+			return "thymeleaf/mac/home/home";
+		}
 		model.addAttribute("user", user);
 		return "thymeleaf/mac/User/myPage";
+//		return "thymeleaf/bootstrap/index";
 	}
 	
 //	계정 삭제
@@ -80,13 +98,20 @@ public class UserController {
 		String idMac = user.getIdMac();
 		boolean result = svc.deleted(idMac);
 		map.put("result", result);
+		
+		if((String)session.getAttribute("idMac") == null){ //세션을 가져옴
+			result = false;
+			map.put("result", result);
+			return map;
+		}
+		
 		return map;
 	}
 	
 //  유저 업데이트폼
 	@GetMapping("/updateForm")
 	public String update(User user, Model model) {
-		System.out.println(user.getIdMac());
+//		System.out.println("여기누");
 		User user2 = svc.getOne(user.getIdMac());
 		model.addAttribute("user", user2);
 		return "thymeleaf/mac/User/updateForm";
@@ -112,33 +137,40 @@ public class UserController {
 		map.put("id" , idMac);
 		return map;
 	}
-//	email 인증
+	
+//	email 인증 보내기
 	@PostMapping("/checkmail")
 	@ResponseBody
 	public Map<String, Object> emailcheck(@RequestParam("emailMac")String emailMac) {
 		Map<String, Object> map = new HashMap<>();
-
 		String random = svc.checkmail(emailMac);
-
 		if(random!=null) {
 			map.put("result", true);
 		} else {
 			map.put("result", false);
 		}
-
 		map.put("code", random);
 		map.put("emailMac", emailMac);
-
 		return map;
 	}
 	
+//	이메일 인증코드
 	@PostMapping("/checkcode")
 	@ResponseBody
 	public Map<String, Object> checkcode(@RequestParam("code")String code) {
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(code);
 		map.put("code", code);
 		return map;
 	}
-
+	
+//	닉네임
+	@PostMapping("/nickCheck")
+	@ResponseBody
+	public Map<String, Object> nickCheck(@RequestParam("nick")String nick) {
+		Map<String, Object> map = new HashMap<>();
+		boolean result = svc.nickCheck(nick);
+		map.put("result", result);
+		return map;
+	}
+	
 }
