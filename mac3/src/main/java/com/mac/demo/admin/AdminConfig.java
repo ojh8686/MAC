@@ -48,15 +48,16 @@ public class AdminConfig
       return http.authorizeRequests()
     		  
            
-       .antMatchers("/admin/**").hasAnyRole("ADMIN")//이 url로 부여한 권한이 맞는지 확인
-         
-           //   .anyRequest().authenticated() 위에 설정한 외에는 다 인증을 거쳐야 함
-               .anyRequest().permitAll()
+       .antMatchers("/admin/**").hasAnyRole("ADMIN")
+       .anyRequest().permitAll()
         
             
             .and()
             .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            //.csrf().ignoringAntMatchers("/logout") //요청시 'POST' not supported 에러 방지(사기 방지 시스템)
+            .ignoringAntMatchers("/big/**")
+    
+            
+             //요청시 'POST' not supported 에러 방지(사기 방지 시스템)
             // .ignoringAntMatchers("/admin/loginForm")
             //.ignoringAntMatchers("/doLogin")
             //.disable()  //csrf 기능을 사용하지 않을 때

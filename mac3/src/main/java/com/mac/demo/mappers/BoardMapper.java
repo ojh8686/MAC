@@ -15,19 +15,19 @@ import com.mac.demo.model.User;
 public interface BoardMapper {
 
 //	게시글CRUD
-	int saveToFree(Board board);
-	int saveToAds(Board board);
+	int save(Board board);
+//	int saveToAds(Board board);
 	
-	int Freeedit(Board board); //게시글 수정
-	int Adsedit(Board board);
+//	게시글 수정
+	int update(Board board);
 	int Noticeedit(Board board);
 	
-	int Freedelete(int num); //게시글 삭제
-	int Adsdelete(int num); 
+	int delete(int num); //게시글 삭제
 	int Noticedelete(int num); 
 	
-	Board getFreeDetail(int num); //게시글 상세보기
-	Board getAdsDetail(int num);
+	int commentAllDelete(int num);//게시글 삭제하면 댓글도 삭제
+	
+	Board getDetail(int numMac, String categoryMac); //게시글 상세보기
 	Board getNoticeDetail(int num);
 	
 //	댓글
@@ -40,8 +40,7 @@ public interface BoardMapper {
 
 	
 //	게시글 목록
-	List<Board> getFreeList(); // 자유게시판
-	List<Board> getAdsList(); // 광고게시판
+	List<Board> getBoardList(String categoryMac); // 자유게시판
 	List<Board> getNoticeList(); // 공지게시판
 	
 //	닉네임, 글내용+제목 검색
@@ -61,5 +60,6 @@ public interface BoardMapper {
 	List<Board> getMypageInAdsBoard(String idMac);
 	
 	Page<Board> getList(Pageable pageable);
+	
 
 }

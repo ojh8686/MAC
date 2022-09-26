@@ -70,11 +70,9 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle">상권 정보 분석</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">그래프 시각화</a>
-                            <a href="feature.html" class="dropdown-item">지도 시각화</a>
-                            
-                        </div>
+                      <div class="dropdown-menu m-0">
+					<a href="/big/location" class="dropdown-item">데이터 시각화</a>
+				</div>
                     </div>
                     
                     <div class="nav-item dropdown">
@@ -94,7 +92,7 @@
          <div th:if="${idMac !=null}">
          <h5 th:text="${idMac}+'님 환영합니다'" th:style="'color:gray'"></h5>
           <a href="" class="btn btn-primary py-2 px-4 ms-3" id="logout">로그아웃</a>
-          <a th:href="'/home/myPage/'+${idMac}" class="btn btn-primary py-2 px-4 ms-3">마이페이지</a>
+          <a th:href="'/user/detail/'+${idMac}" class="btn btn-primary py-2 px-4 ms-3">마이페이지</a>
          </div>
          </nav>
             </div>
@@ -133,7 +131,8 @@
 				<h1 class="mb-0">아이디 찾기</h1>
 			</div>
 			<div class="login-form-backgroud row mx-auto">
-				<form class="form-signin"th:action="@{/login/findId}" method="post">
+				<form class="form-signin" action="/login/findId" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<div class="col-md-4 mb-3 mx-auto">
 					  <div th:if="*{foundId==null}">
 						<input id="nameMac" name="nameMac" placeholder="이름을 입력하세요" type="text"

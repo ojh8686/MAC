@@ -13,11 +13,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.mac.demo.mappers.UserMapper;
+import com.mac.demo.model.Board;
 import com.mac.demo.model.User;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class UserService {
 
@@ -93,6 +92,16 @@ public class UserService {
 		User user = dao.getOneNick(nick);
 		return user == null;
 	}
+
+	public List<Board> findWrite(String idMac) {
+		System.out.println("111");
+		return dao.findWrite(idMac);
+		
+		
+	}
+	
+
+	
 	
 	
 	
